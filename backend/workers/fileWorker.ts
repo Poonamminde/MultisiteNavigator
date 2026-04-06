@@ -1,12 +1,7 @@
 import { Worker } from "bullmq";
-import IORedis from "ioredis";
 import Website from "../models/Website";
 import extractUrls from "../utils/extractUrls";
-import { REDIS_URL } from "../config";
-
-const connection = new IORedis(REDIS_URL, {
-  maxRetriesPerRequest: null,
-});
+import { REDIS_CONNECTION } from "../config";
 
 const worker = new Worker(
   "fileQueue",
@@ -24,5 +19,5 @@ const worker = new Worker(
 
     return { count: urls.length };
   },
-  { connection }
+  { connection: REDIS_CONNECTION }
 );

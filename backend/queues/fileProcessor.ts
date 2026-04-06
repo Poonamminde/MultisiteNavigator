@@ -1,8 +1,6 @@
 import { Queue } from "bullmq";
-import IORedis from "ioredis";
-
-const connection = new IORedis();
+import { REDIS_CONNECTION } from "../config";
 
 export const fileQueue = new Queue("fileQueue", {
-  connection
+  connection: REDIS_CONNECTION
 });
