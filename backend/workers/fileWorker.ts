@@ -2,11 +2,10 @@ import { Worker } from "bullmq";
 import IORedis from "ioredis";
 import Website from "../models/Website";
 import extractUrls from "../utils/extractUrls";
+import { REDIS_URL } from "../config";
 
-const connection = new IORedis({
-  host: "127.0.0.1",
-  port: 6379,
-  maxRetriesPerRequest: null
+const connection = new IORedis(REDIS_URL, {
+  maxRetriesPerRequest: null,
 });
 
 const worker = new Worker(
